@@ -12,11 +12,11 @@
     <title>Doclinic - Dashboard</title>
 
 	<!-- Vendors Style-->
-	<link rel="stylesheet" href="css/vendors_css.css">
+	<link rel="stylesheet" href="{{asset('css/vendors_css.css')}}">
 
 	<!-- Style-->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/skin_color.css">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('css/skin_color.css')}}">
 
   </head>
 
@@ -857,15 +857,15 @@
 
 
 	<!-- Vendor JS -->
-	<script src="js/vendors.min.js"></script>
-	<script src="js/pages/chat-popup.js"></script>
-    <script src="../assets/icons/feather-icons/feather.min.js"></script>
+	<script src="{{asset('js/vendors.min.js')}}"></script>
+	<script src="{{asset('js/pages/chat-popup.js')}}"></script>
+    <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
 
-	<script src="../assets/vendor_components/datatable/datatables.min.js"></script>
+	<script src="{{asset('assets/vendor_components/datatable/datatables.min.js')}}"></script>
 
 	<!-- Doclinic App -->
-	<script src="js/template.js"></script>
-	<script src="js/pages/patients.js"></script>
+	<script src="{{asset('js/template.js')}}"></script>
+	<script src="{{asset('js/pages/patients.js')}}"></script>
 
 </body>
 

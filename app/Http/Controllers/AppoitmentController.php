@@ -12,7 +12,7 @@ class AppoitmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.bookings.appointments');
     }
 
     /**

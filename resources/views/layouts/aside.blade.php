@@ -26,7 +26,7 @@
 					</span>
 				  </a>
 				  <ul class="treeview-menu">
-					<li><a href="{{url('patients')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patients</a></li>
+					<li><a href="{{url('patients/view')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patients</a></li>
 					<li><a href="{{url('patient_details')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patient Details</a></li>
 				  </ul>
 				</li>

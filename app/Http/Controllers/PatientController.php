@@ -12,7 +12,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.patient.patients');
     }
 
     /**
@@ -28,7 +28,30 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'gender' => 'required|string|max:10',
+            'address' => 'nullable|string|max:255',
+            'town' => 'nullable|string|max:255',
+            'postal_code' => 'nullable|string|max:20',
+            'county' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:20',
+            'email' => 'nullable|string|email|max:255|unique:patients,email',
+            'emergency_contact_name' => 'nullable|string|max:255',
+            'emergency_contact_phone' => 'nullable|string|max:20',
+        ]);
+
+        // Create a new patient record
+        $patient = Patient::create($validatedData);
+
+        // Return a response
+        return response()->json([
+            'message' => 'Patient created successfully',
+            'patient' => $patient
+        ], 201);
     }
 
     /**

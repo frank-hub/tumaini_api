@@ -32,16 +32,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('create',[AppoitmentController::class,'create'])->name('app_create');
         Route::post('create',[AppoitmentController::class,'store'])->name('app_store');
     });
+
+    Route::prefix('patients')->group(function () {
+        Route::get('view',[PatientController::class,'index']);
+    });
 });
 
-
-Route::get('appointments', function () {
-    return view('admin.appointments');
-});
-
-Route::get('patients', function () {
-    return view('admin.patients');
-});
 
 Route::get('patient_details', function () {
     return view('admin.patient_details');
