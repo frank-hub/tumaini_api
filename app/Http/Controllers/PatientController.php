@@ -97,14 +97,15 @@ class PatientController extends Controller
         $patient->emergency_contact_phone = $request->input('emergency_contact_phone');
     
         $patient->save();
-    return redirect('/patients/view')->with('success', 'Item updated successfully');
+    return redirect('/patients/view')->with('success', 'Patient updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Patient $patient)
+    public function destroy($id)
     {
-        
+        Patient::where('id', $id)->delete();
+        return redirect('/patients/view')->with('success', 'Patient Deleted successfully');
     }
 }

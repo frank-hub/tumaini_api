@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,7 +20,7 @@
 	<link rel="stylesheet" href="{{asset('css/skin_color.css')}}">
 
   </head>
-
+  @include('sweetalert::alert')
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
 
 <div class="wrapper">
@@ -174,12 +175,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="me-auto">
-					<h4 class="page-title">Patients</h4>
+					<h4 class="page-title">Appointments</h4>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">Patients</li>
+								<li class="breadcrumb-item active" aria-current="page">Edit Appointments</li>
 							</ol>
 						</nav>
 					</div>
@@ -190,269 +191,134 @@
 
 		<!-- Main content -->
 		<section class="content">
-			<div class="row">
-				<div class="col-12">
-					<div class="box">
-						<div class="box-body">
-							<div class="table-responsive rounded card-table">
-								<table class="table border-no" id="example1">
-									<thead>
-										<tr>
-											<th>Patient ID</th>											
-											<th>Patient Name</th>
-											<th>Phone Number</th>
-											<th>Email Address</th>
-											<th>Gender</th>
-											<th>DOB</th>
-											<th>Address</th>
-											<th>County</th>
-											<th>Status</th>
-											
-											<th></th>
-										</tr>
-									</thead>
-								
-									<tbody>
-										@foreach ($patients ?? ''  as $item)
-										<tr class="hover-primary">
-											<td>#p{{$item->id}}</td>											
-											<td>{{$item->first_name. ' '. $item->last_name}}</td>
-											<td>{{$item->phone_number}}</td>
-											<td>{{$item->email}}</td>
-											<td>{{$item->gender}}</td>
-											<td>{{$item->date_of_birth}}</td>
-											<td>{{$item->address}}</td>
-											<td>{{$item->county}}</td>
-											
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="{{url('patients/patient_details')."/".$item->id}}">View Details</a>
-													<a class="dropdown-item" href="{{url('patients/edit')."/".$item->id}}">Edit</a>
-													<a class="dropdown-item" href="{{url('patients/delete')."/".$item->id}}">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>	
-										@endforeach
-										
-										{{-- <tr class="hover-primary">
-											<td>#p245880</td>
-											<td>18 April 2021, 11:30 AM</td>
-											<td>Mical clark</td>
-											<td>Dr. Aiden Doe</td>
-											<td>Diabetes</td>
-											<td><span class="badge badge-success-light">Recovered</span></td>
-											<td>FF-105</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245881</td>
-											<td>22 May 2021, 15:30 PM</td>
-											<td>Stela clark</td>
-											<td>Dr. Lalvani doe</td>
-											<td>Hearing Loss</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>FF-112</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245882</td>
-											<td>26 April 2021, 10:30 AM</td>
-											<td>Boone Doe</td>
-											<td>Dr. Don Paton</td>
-											<td>Allergies & Asthma</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>FF-124</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245883</td>
-											<td>30 April 2021, 10:30 AM</td>
-											<td>Carlie Paton</td>
-											<td>Dr. Mical Doe</td>
-											<td>Sleep Problem</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>FF-117</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245884</td>
-											<td>1 May 2021, 10:30 AM</td>
-											<td>Delilah</td>
-											<td>Dr. Johen Doe</td>
-											<td>Dental Care</td>
-											<td><span class="badge badge-success-light">Recovered</span></td>
-											<td>FF-141</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245885</td>
-											<td>2 May 2021, 10:30 AM</td>
-											<td>Hannah Doe</td>
-											<td>Dr. Jennifer Ruby</td>
-											<td>Diabetes</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-203</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245886</td>
-											<td>3 May 2021, 10:30 AM</td>
-											<td>Emerson Clark</td>
-											<td>Dr. Alex Siauw</td>
-											<td>Covid-19 Suspect</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-201</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245887</td>
-											<td>4 May 2021, 10:30 AM</td>
-											<td>Crystal Doe</td>
-											<td>Dr. Samuel Jr.</td>
-											<td>Cold & Flu</td>
-											<td><span class="badge badge-success-light">Recovered</span></td>
-											<td>SF-205</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245888</td>
-											<td>5 May 2021, 10:30 AM</td>
-											<td>Jenny don</td>
-											<td>Dr. Widan Cheeh</td>
-											<td>Cold & Flu</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-210</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245889</td>
-											<td>6 May 2021, 10:30 AM</td>
-											<td>Joanne Clark</td>
-											<td>Dr. Samantha</td>
-											<td>Dental Care</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>SF-215</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245890</td>
-											<td>6 May 2021, 10:30 AM</td>
-											<td>Madeline doe</td>
-											<td>Dr. Widan Cheeh</td>
-											<td>Allergies & Asthma</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-216</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr> --}}
-									</tbody>
-								</table>
-							</div>
+			<div class="row">			  
+			
+            <div class="col-lg-1"></div>
+				<div class="col-lg-10 col-12">
+					  <div class="box">
+						<div class="box-header with-border">
+						  <h4 class="box-title">Edit Appointments Details</h4>
 						</div>
-					</div>
+						<!-- /.box-header -->
+                        <form method="post" action="{{route('app_edit')}}">
+                            @csrf 
+                            @method('PUT')
+							<div class="box-body">
+								<h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Patients Info</h4>
+								<hr class="my-15">
+								<div class="row">
+								  <div class="col-md-4">
+                                    <input type="hidden" class="form-control" name="aid" value="{{$appointment->id}}">
+								   
+									<div class="form-group">
+									  <label class="form-label">Patient Name</label>
+									 <select class="form-select" name="patient_id" value="{{$appointment->patient->first_name.' '.$appointment->patient->last_name}}">
+                                        @foreach ($patients as $item)
+                                            <option value="{{$item->id}}">{{$item->first_name.' '.$item->last_name}}</option> 
+                                        @endforeach
+                                     </select>
+									</div>
+								  </div>
+								  
+								</div>
+                              
+								<h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i> Medical Info </h4>
+								<hr class="my-15">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Current Symptoms</label>
+                                            <input class="form-control" type="text" placeholder="symptoms" name="symptoms" value="{{$appointment->symptoms}}">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Severity of The Desease</label>
+                                            <select  class="form-select" name="severity_desease" value="{{$appointment->severity_desease}}">
+                                                <option value="Minor">Minor</option>
+                                                <option value="Moderate">Moderate</option>
+                                                <option value="Major">Major</option>
+                                                <option value="Extreme">Extreme</option>
+                                          </select>
+                                            
+                                         </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Allergies</label>
+                                            <input class="form-control" type="text" placeholder="Allergies" name="allergies" value="{{$appointment->allergies}}">
+                                          </div>
+                                    </div>
+                                   
+                                </div>	
+                                <h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i> Appointment Info </h4>
+								<hr class="my-15">		
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Type of Appointment</label>
+                                            <select  class="form-select" name="appointment_type" value="{{$appointment->appointment_type}}">
+                                                <option value="Consultation">Consultation</option>
+                                                <option value="EMT">EMT</option>
+                                                <option value="Check-up">Check-up</option>
+                                               
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Diagnostic Center</label>
+                                            <select class="form-select" name="center" value="{{$appointment->center}}">
+                                                @foreach ($centers as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option> 
+                                                @endforeach
+                                             </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Date and Time</label>
+                                            <input class="form-control" type="datetime-local"  name="date_time" value="{{$appointment->date_time}}">
+                                          </div>
+                                    </div>
+                                   
+                                </div>	
+                                				
+                                <div class="row">
+                                   
+                                    <div class="form-group">
+                                        <label class="form-label">Appointment Reasons</label>
+                                        <textarea rows="2" class="form-control" placeholder="Appointment Reasons" name="appointment_reason">{{$appointment->appointment_reason}}</textarea>
+                                      </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Additional Notes</label>
+                                        <textarea rows="4" class="form-control" placeholder="Additional Notes" name="notes">{{$appointment->notes}}</textarea>
+                                      </div>
+                                   
+                                </div>	
+								{{-- //emergency_contact_name --}}
+								
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer text-end">
+								<button type="button" class="btn btn-warning me-1">
+								  <i class="ti-trash"></i> Cancel
+								</button>
+								<button type="submit" class="btn btn-primary">
+								  <i class="ti-save-alt"></i> Update
+								</button>
+							</div>  
+						</form>
+					  </div>
+					  <!-- /.box -->			
 				</div>
-			</div>
+
+				
+
+			
+		    </div>
+			
+
 		</section>
 		<!-- /.content -->
 	  </div>

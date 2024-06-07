@@ -32,6 +32,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('index',[AppoitmentController::class,'index'])->name('app_index');
         Route::get('add',[AppoitmentController::class,'create'])->name('app_create');
         Route::post('create',[AppoitmentController::class,'store'])->name('app_store');
+        Route::get('/app_details/{id}',[AppoitmentController::class,'show'])->name('app_details');
+        Route::get('/edit/{id}',[AppoitmentController::class,'edit'])->name('edit');
+        Route::put('app_edit',[AppoitmentController::class,'update'])->name('app_edit');
+        Route::get('/delete/{id}',[AppoitmentController::class,'destroy'])->name('delete');
+        
     });
 
     Route::prefix('patients')->group(function () {
@@ -41,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/patient_details/{id}',[PatientController::class,'show'])->name('patient_details');
         Route::get('/edit/{id}',[PatientController::class,'edit'])->name('edit');
         Route::put('patient_edit',[PatientController::class,'update'])->name('patient_edit');
+        Route::get('/delete/{id}',[PatientController::class,'destroy'])->name('delete');
     });
 
 });

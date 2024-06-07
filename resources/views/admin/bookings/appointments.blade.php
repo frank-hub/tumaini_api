@@ -205,10 +205,8 @@
 											<th>Patient Name</th>
 											<th>Appointment Type</th>
 											<th>Date</th>
-											<th>Gender</th>
-											<th>DOB</th>
-											<th>Address</th>
-											<th>County</th>
+											<th>Symptoms</th>
+											<th>Reasons</th>											
 											<th>Status</th>
 											
 											<th></th>
@@ -218,22 +216,21 @@
 									<tbody>
 										@foreach ($appointments ?? ''  as $item)
 										<tr class="hover-primary">
-											<td>#p{{$item->id}}</td>											
+											<td>{{$item->id}}</td>											
 											<td>{{$item->patient->first_name. ' '. $item->patient->last_name}}</td>
 											<td>{{$item->appointment_type}}</td>
 											<td>{{$item->date_time}}</td>
 											<td>{{$item->symptoms}}</td>
-											<td>{{$item->center}}</td>
-											<td>{{$item->address}}</td>
-											<td>{{$item->county}}</td>
+											<td>{{$item->appointment_reason}}</td>
+											
 											
 											<td>
 												<div class="btn-group">
 												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
 												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="{{url('patients/patient_details')."/".$item->id}}">View Details</a>
-													<a class="dropdown-item" href="{{url('patients/edit')."/".$item->id}}">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
+													<a class="dropdown-item" href="{{url('appointment/app_details')."/".$item->id}}">View Details</a>
+													<a class="dropdown-item" href="{{url('appointment/edit')."/".$item->id}}">Edit</a>
+													<a class="dropdown-item" href="{{url('appointment/delete')."/".$item->id}}">Delete</a>
 												  </div>
 											    </div>
 											</td>

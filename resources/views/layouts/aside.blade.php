@@ -11,11 +11,19 @@
 					<span>Dashboard</span>
 				  </a>
 				</li>
-				<li>
-				  <a href="{{route('app_index')}}">
+				
+				<li class="treeview">
+				  <a href="#">
 					<i class="icon-Barcode-read"><span class="path1"></span><span class="path2"></span></i>
 					<span>Appointments</span>
+					<span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
 				  </a>
+				  <ul class="treeview-menu">
+					<li><a href="{{url('appointment/index')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Appointments</a></li>
+					<li><a href="{{url('appointment/add')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>New Appointments</a></li>
+				  </ul>
 				</li>
 				<li class="treeview">
 				  <a href="#">
@@ -27,7 +35,20 @@
 				  </a>
 				  <ul class="treeview-menu">
 					<li><a href="{{url('patients/view')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patients</a></li>
-					<li><a href="{{url('patients/patient_details')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patient Details</a></li>
+					<li><a href="{{url('patients/add')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Patient</a></li>
+				  </ul>
+				</li>
+				<li class="treeview">
+				  <a href="#">
+					<i class="icon-Compiling"><span class="path1"></span><span class="path3"></span></i>
+					<span>Centers</span>
+					<span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+				  </a>
+				  <ul class="treeview-menu">
+					<li><a href="{{url('centers/view')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Diagnostic Centers</a></li>
+					<li><a href="{{url('centers/add')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add Diagnostic Centers</a></li>
 				  </ul>
 				</li>
 				<li>

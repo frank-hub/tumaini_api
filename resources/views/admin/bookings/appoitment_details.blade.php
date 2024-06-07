@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -19,7 +19,6 @@
 	<link rel="stylesheet" href="{{asset('css/skin_color.css')}}">
 
   </head>
-
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
 
 <div class="wrapper">
@@ -166,7 +165,10 @@
       </div>
     </nav>
   </header>
-@include('layouts.aside')
+
+  <!-- Left side column. contains the logo and sidebar -->
+  @include('layouts.aside')
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 	  <div class="container-full">
@@ -174,12 +176,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="me-auto">
-					<h4 class="page-title">Patients</h4>
+					<h4 class="page-title">Appointment Details</h4>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">Patients</li>
+								<li class="breadcrumb-item active" aria-current="page">Appointment Details</li>
 							</ol>
 						</nav>
 					</div>
@@ -190,275 +192,218 @@
 
 		<!-- Main content -->
 		<section class="content">
+
 			<div class="row">
-				<div class="col-12">
+				<div class="col-xl-4 col-12">
 					<div class="box">
+						<div class="box-body box-profile">
+						  <div class="row">
+							<div class="col-12">
+								<div>
+									<p><b>Patient Name </b> :<span class="text-gray ps-10">{{$appointment->patient->first_name.' '. $appointment->patient->last_name}}</span> </p>
+									<p><b>Phone </b><span class="text-gray ps-10">{{$appointment->patient->phone_number}}</span></p>
+									<p><b>Address</b> :<span class="text-gray ps-10">{{$appointment->patient->address.', '.$appointment->patient->town.', '.ucfirst($appointment->patient->county).', '.$appointment->patient->postal_code}}</span></p>
+								</div>
+							</div>
+							
+						  </div>
+						</div>
+						<!-- /.box-body -->
+					  </div>
+					<div class="box">
+						<div class="box-header border-0 pb-0">
+							<h4 class="box-title">Appointment Details </h4>
+						</div>
 						<div class="box-body">
-							<div class="table-responsive rounded card-table">
-								<table class="table border-no" id="example1">
-									<thead>
-										<tr>
-											<th>Patient ID</th>											
-											<th>Patient Name</th>
-											<th>Phone Number</th>
-											<th>Email Address</th>
-											<th>Gender</th>
-											<th>DOB</th>
-											<th>Address</th>
-											<th>County</th>
-											<th>Status</th>
-											
-											<th></th>
-										</tr>
-									</thead>
-								
-									<tbody>
-										@foreach ($patients ?? ''  as $item)
-										<tr class="hover-primary">
-											<td>#p{{$item->id}}</td>											
-											<td>{{$item->first_name. ' '. $item->last_name}}</td>
-											<td>{{$item->phone_number}}</td>
-											<td>{{$item->email}}</td>
-											<td>{{$item->gender}}</td>
-											<td>{{$item->date_of_birth}}</td>
-											<td>{{$item->address}}</td>
-											<td>{{$item->county}}</td>
-											
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="{{url('patients/patient_details')."/".$item->id}}">View Details</a>
-													<a class="dropdown-item" href="{{url('patients/edit')."/".$item->id}}">Edit</a>
-													<a class="dropdown-item" href="{{url('patients/delete')."/".$item->id}}">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>	
-										@endforeach
-										
-										{{-- <tr class="hover-primary">
-											<td>#p245880</td>
-											<td>18 April 2021, 11:30 AM</td>
-											<td>Mical clark</td>
-											<td>Dr. Aiden Doe</td>
-											<td>Diabetes</td>
-											<td><span class="badge badge-success-light">Recovered</span></td>
-											<td>FF-105</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245881</td>
-											<td>22 May 2021, 15:30 PM</td>
-											<td>Stela clark</td>
-											<td>Dr. Lalvani doe</td>
-											<td>Hearing Loss</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>FF-112</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245882</td>
-											<td>26 April 2021, 10:30 AM</td>
-											<td>Boone Doe</td>
-											<td>Dr. Don Paton</td>
-											<td>Allergies & Asthma</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>FF-124</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245883</td>
-											<td>30 April 2021, 10:30 AM</td>
-											<td>Carlie Paton</td>
-											<td>Dr. Mical Doe</td>
-											<td>Sleep Problem</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>FF-117</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245884</td>
-											<td>1 May 2021, 10:30 AM</td>
-											<td>Delilah</td>
-											<td>Dr. Johen Doe</td>
-											<td>Dental Care</td>
-											<td><span class="badge badge-success-light">Recovered</span></td>
-											<td>FF-141</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245885</td>
-											<td>2 May 2021, 10:30 AM</td>
-											<td>Hannah Doe</td>
-											<td>Dr. Jennifer Ruby</td>
-											<td>Diabetes</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-203</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245886</td>
-											<td>3 May 2021, 10:30 AM</td>
-											<td>Emerson Clark</td>
-											<td>Dr. Alex Siauw</td>
-											<td>Covid-19 Suspect</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-201</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245887</td>
-											<td>4 May 2021, 10:30 AM</td>
-											<td>Crystal Doe</td>
-											<td>Dr. Samuel Jr.</td>
-											<td>Cold & Flu</td>
-											<td><span class="badge badge-success-light">Recovered</span></td>
-											<td>SF-205</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245888</td>
-											<td>5 May 2021, 10:30 AM</td>
-											<td>Jenny don</td>
-											<td>Dr. Widan Cheeh</td>
-											<td>Cold & Flu</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-210</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245889</td>
-											<td>6 May 2021, 10:30 AM</td>
-											<td>Joanne Clark</td>
-											<td>Dr. Samantha</td>
-											<td>Dental Care</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>SF-215</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr>
-										<tr class="hover-primary">
-											<td>#p245890</td>
-											<td>6 May 2021, 10:30 AM</td>
-											<td>Madeline doe</td>
-											<td>Dr. Widan Cheeh</td>
-											<td>Allergies & Asthma</td>
-											<td><span class="badge badge-warning-light">In Treatment</span></td>
-											<td>SF-216</td>
-											<td>
-												<div class="btn-group">
-												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
-													<a class="dropdown-item" href="#">Delete</a>
-												  </div>
-											    </div>
-											</td>
-										</tr> --}}
-									</tbody>
-								</table>
+							<div class="widget-timeline-icon">
+								<ul>
+									<li>
+										<div class="icon bg-primary fa fa-heart-o"></div>
+										<a class="timeline-panel text-muted" >
+											<h4 class="mb-2 mt-1">Appointment Type</h4>
+											<p class="fs-15 mb-0 ">{{$appointment->appointment_type}}</p>
+										</a>
+									</li>
+									<li>
+										<div class="icon bg-primary fa fa-heart-o"></div>
+										<a class="timeline-panel text-muted" >
+											<h4 class="mb-2 mt-1">Appointment Reason</h4>
+											<p class="fs-15 mb-0 ">{{$appointment->appointment_reason}}</p>
+										</a>
+									</li>
+									<li>
+										<div class="icon bg-primary fa fa-heart-o"></div>
+										<a class="timeline-panel text-muted" >
+											<h4 class="mb-2 mt-1">Appointment Date</h4>
+											<p class="fs-15 mb-0 ">{{$appointment->date_time}}</p>
+										</a>
+									</li>
+									
+								</ul>
 							</div>
 						</div>
 					</div>
+					{{-- <div class="box">
+						<div class="box-header">
+							<h4 class="box-title">Assigned Doctor</h4>
+						</div>
+						<div class="box-body">
+							<div class="d-flex align-items-center">
+								<img src="../images/avatar/avatar-10.png" class="w-100 bg-primary-light rounded10 me-15" alt="" />
+								<div>
+									<h4 class="mb-0">Dr. Johen Doe</h4>
+									<p class="text-muted">Physician</p>
+									<div class="d-flex">
+									  <i class="text-warning fa fa-star"></i>
+									  <i class="text-warning fa fa-star"></i>
+									  <i class="text-warning fa fa-star"></i>
+									  <i class="text-warning fa fa-star"></i>
+									  <i class="text-warning fa fa-star-half"></i>
+								    </div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-between mt-15">
+								<a href="javascript:void(0);" class="btn btn-danger-light me-4">Unassign</a>
+								<a href="javascript:void(0);" class="btn btn-success-light ">Check</a>
+							</div>
+						</div>
+					</div> --}}
+				</div>
+				<div class="col-xl-8 col-12">
+					<div class="d-md-flex align-items-center justify-content-between mb-20">
+						<a href="javascript:void(0);" class="btn btn-primary me-5 mb-md-0 mb-5"><i class="fa fa-edit"></i> Edit Appointment</a>
+						<div class="d-flex">
+							<a href="javascript:void(0);" class="btn btn-outline btn-danger me-5"><i class="fa fa-times-circle-o"></i> Reject Appointment</a>
+							<a href="javascript:void(0);" class="btn btn-success"><i class="fa fa-check-circle-o"></i> Accept Appointment</a>
+						</div>
+					</div>
+					<div class="box">
+						<div class="box-body text-end min-h-150" style="background-image:url(../images/gallery/landscape14.jpg); background-repeat: no-repeat; background-position: center;background-size: cover;">
+						</div>
+						<div class="box-body wed-up position-relative">
+							<div class="d-md-flex align-items-center">
+								<div class=" me-20 text-center text-md-start">
+									<img src="../images/avatar/2.jpg" class="bg-success-light rounded10" alt="" />
+									<div class="text-center my-10">
+										<p class="mb-0">Severity of Desease</p>
+										<h4>{{$appointment->severity_desease}}</h4>
+									</div>
+								</div>
+								<div class="mt-40">
+									<h4 class="fw-600 mb-5">{{$appointment->patient->first_name.' '. $appointment->patient->last_name}}</h4>
+									<h5 class="fw-500 mb-5">P#{{$appointment->patient->id}}</h5>
+									<p><i class="fa fa-clock-o"></i> {{$appointment->date_time}}</p>
+								</div>
+							</div>
+						</div>
+						<div class="box-body pt-0">
+							<h4>Symptoms</h4>
+							<p>{{$appointment->symptoms}}</p>
+                            <h4>Story/Notes</h4>
+							<p>{{$appointment->notes}}</p>
+						</div>
+					</div>
+					{{-- <div class="row">
+						<div class="col-xl-6 col-12">
+							<div class="box">
+								<div class="box-header">
+								  <h4 class="box-title">Current Vitals</h4>
+								  <div class="box-controls pull-right">
+									<div class="lookup lookup-circle lookup-right">
+									  <input type="text" name="s" placeholder="Patients id">
+									</div>
+								  </div>
+								</div>
+								<div class="box-body">
+								  <div class="flexbox bb-1 mb-15">
+									<div><p><span class="text-mute">Patient Name:</span> <strong>Jonsahn</strong></p></div>
+									<div><p><span class="text-mute">Patient Id:</span> <strong>1254896</strong></p></div>
+								  </div>
+								  <div class="row">
+									<div class="col-12">
+										<div class="row bb-1 pb-10">
+											<div class="col-4">
+												<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/weight.png" alt="">
+												<div>
+													<p class="mb-0"><small>Weight</small></p>
+													<h5 class="mb-0"><strong>230 ibs</strong></h5>
+												</div>
+											</div>
+											<div class="col-4 bs-1 be-1">
+												<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/human.png" alt="">
+												<div>
+													<p class="mb-0"><small>Height</small></p>
+													<h5 class=" mb-0"><strong>6’1</strong></h5>
+												</div>
+											</div>
+											<div class="col-4">
+												<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/bmi.png" alt="">
+												<div>
+													<p class="mb-0"><small>BMI</small></p>
+													<h5 class="mb-0"><strong>30.34</strong></h5>
+												</div>
+											</div>
+										</div>
+										<div class="row pt-5">
+											<div class="col-12">
+												<span class="text-danger">Blood Pressure</span>
+											</div>
+											<div class="col-6">
+												<div class="progress progress-xs mb-0 mt-5 w-40">
+													<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+													</div>
+												</div>
+												<h2 class="float-start mt-0 mr-10"><strong>150</strong></h2>
+												<div>
+													<p class="mb-0"><small>Systolic</small></p>
+													<p class="mb-0 mt-0"><small class="vertical-align-super">mmHg</small></p>
+												</div>
+											</div>
+											<div class="col-6 bl-1">
+												<div class="progress progress-xs mb-0 mt-5 w-40">
+													<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+													</div>
+												</div>
+												<h2 class="float-start mt-0 mr-10"><strong>90</strong></h2>
+												<div>
+													<p class="mb-0"><small>Diastolic</small></p>
+													<p class="mb-0 mt-0"><small class="vertical-align-super">mmHg</small></p>
+												</div>
+											</div>
+										</div>
+									</div>
+								  </div>
+								</div>
+							  <div class="box-body pt-0">
+								<p><small>Recorded on 25/05/2018</small></p>
+							  </div>
+							  <div class="box-body bg-primary">
+								  <img src="../images/smoking.png" alt="" class="float-start me-10">
+								  <p>Smoking Status : current every day smoker</p>
+							  </div>
+							</div>
+						</div>
+						<div class="col-xl-6 col-12">
+							<div class="box">
+								<div class="box-header no-border">
+									<h4 class="box-title">Your Statistic</h4>
+								</div>
+								<div class="box-body">
+									<div id="chart123"></div>
+								</div>
+							</div>
+						</div>
+					</div> --}}
 				</div>
 			</div>
+
 		</section>
 		<!-- /.content -->
 	  </div>
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+
+   <footer class="main-footer">
     <div class="pull-right d-none d-sm-inline-block">
         <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
 		  <li class="nav-item">
@@ -468,7 +413,6 @@
     </div>
 	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
   </footer>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar">
 
@@ -735,7 +679,6 @@
 
   <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
-
 </div>
 <!-- ./wrapper -->
 
@@ -865,7 +808,6 @@
 	<!-- Page Content overlay -->
 
 
-	<!-- Vendor JS -->
 	<script src="{{asset('js/vendors.min.js')}}"></script>
 	<script src="{{asset('js/pages/chat-popup.js')}}"></script>
     <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
@@ -875,6 +817,8 @@
 	<!-- Doclinic App -->
 	<script src="{{asset('js/template.js')}}"></script>
 	<script src="{{asset('js/pages/patients.js')}}"></script>
+
+
 
 </body>
 
