@@ -198,37 +198,46 @@
 								<table class="table border-no" id="example1">
 									<thead>
 										<tr>
-											<th>Patient ID</th>
-											<th>Date Check In</th>
+											<th>Patient ID</th>											
 											<th>Patient Name</th>
-											<th>Doctor Assgined</th>
-											<th>Disease</th>
+											<th>Phone Number</th>
+											<th>Email Address</th>
+											<th>Gender</th>
+											<th>DOB</th>
+											<th>Address</th>
+											<th>County</th>
 											<th>Status</th>
-											<th>Room No</th>
+											
 											<th></th>
 										</tr>
 									</thead>
+								
 									<tbody>
+										@foreach ($patients ?? ''  as $item)
 										<tr class="hover-primary">
-											<td>#p245879</td>
-											<td>14 April 2021, 10:30 AM</td>
-											<td>Aaliyah clark</td>
-											<td>Dr. Johen Doe</td>
-											<td>Cold & Flu</td>
-											<td><span class="badge badge-danger-light">New Patient</span></td>
-											<td>FF-103</td>
+											<td>#p{{$item->id}}</td>											
+											<td>{{$item->first_name. ' '. $item->last_name}}</td>
+											<td>{{$item->phone_number}}</td>
+											<td>{{$item->email}}</td>
+											<td>{{$item->gender}}</td>
+											<td>{{$item->date_of_birth}}</td>
+											<td>{{$item->address}}</td>
+											<td>{{$item->county}}</td>
+											
 											<td>
 												<div class="btn-group">
 												  <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
 												  <div class="dropdown-menu">
-													<a class="dropdown-item" href="#">View Details</a>
-													<a class="dropdown-item" href="#">Edit</a>
+													<a class="dropdown-item" href="{{url('patients/patient_details')."/".$item->id}}">View Details</a>
+													<a class="dropdown-item" href="{{url('patients/edit')."/".$item->id}}">Edit</a>
 													<a class="dropdown-item" href="#">Delete</a>
 												  </div>
 											    </div>
 											</td>
-										</tr>
-										<tr class="hover-primary">
+										</tr>	
+										@endforeach
+										
+										{{-- <tr class="hover-primary">
 											<td>#p245880</td>
 											<td>18 April 2021, 11:30 AM</td>
 											<td>Mical clark</td>
@@ -436,7 +445,7 @@
 												  </div>
 											    </div>
 											</td>
-										</tr>
+										</tr> --}}
 									</tbody>
 								</table>
 							</div>

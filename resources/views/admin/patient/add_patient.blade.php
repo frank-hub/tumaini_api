@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,7 @@
 	<link rel="stylesheet" href="{{asset('css/skin_color.css')}}">
 
   </head>
+  @include('sweetalert::alert')
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
 
 <div class="wrapper">
@@ -165,10 +167,7 @@
       </div>
     </nav>
   </header>
-
-  <!-- Left side column. contains the logo and sidebar -->
-  @include('layouts.aside')
-
+@include('layouts.aside')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 	  <div class="container-full">
@@ -176,12 +175,12 @@
 		<div class="content-header">
 			<div class="d-flex align-items-center">
 				<div class="me-auto">
-					<h4 class="page-title">Patient Details</h4>
+					<h4 class="page-title">Patients</h4>
 					<div class="d-inline-block align-items-center">
 						<nav>
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
-								<li class="breadcrumb-item active" aria-current="page">Patient Details</li>
+								<li class="breadcrumb-item active" aria-current="page">Patients</li>
 							</ol>
 						</nav>
 					</div>
@@ -192,239 +191,193 @@
 
 		<!-- Main content -->
 		<section class="content">
+			<div class="row">			  
+			
+            <div class="col-lg-1"></div>
+				<div class="col-lg-10 col-12">
+					  <div class="box">
+						<div class="box-header with-border">
+						  <h4 class="box-title">Patients Details</h4>
+						</div>
+						<!-- /.box-header -->
+                        <form method="post" action="{{route('patient_store')}}">
+                            @csrf 
+							<div class="box-body">
+								<h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Basic Info</h4>
+								<hr class="my-15">
+								<div class="row">
+								  <div class="col-md-4">
 
-			<div class="row">
-				<div class="col-xl-4 col-12">
-					<div class="box">
-						<div class="box-body box-profile">
-						  <div class="row">
-							<div class="col-12">
-								<div>
-									<p>Email :<span class="text-gray ps-10">{{$patient->first_name.' '. $patient->last_name}}</span> </p>
-									<p>Phone :<span class="text-gray ps-10">{{$patient->phone_number}}</span></p>
-									<p>Address :<span class="text-gray ps-10">{{$patient->address.', '.$patient->town.', '.ucfirst($patient->county).', '.$patient->postal_code}}</span></p>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="pb-15">
-									<p class="mb-10">Social Profile</p>
-									<div class="user-social-acount">
-										<button class="btn btn-circle btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></button>
-										<button class="btn btn-circle btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></button>
-										<button class="btn btn-circle btn-social-icon btn-instagram"><i class="fa fa-instagram"></i></button>
+									<div class="form-group">
+									  <label class="form-label">First Name</label>
+									  <input type="text" class="form-control" placeholder="First Name" name="first_name">
 									</div>
-								</div>
-							</div>
-							<div class="col-12">
-								<div>
-									<div class="map-box">
-										<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2805244.1745767146!2d-86.32675167439648!3d29.383165774894163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c1766591562abf%3A0xf72e13d35bc74ed0!2sFlorida%2C+USA!5e0!3m2!1sen!2sin!4v1501665415329" class="w-p100" height="175" style="border:0" allowfullscreen></iframe>
+								  </div>
+								  <div class="col-md-4">
+									<div class="form-group">
+									  <label class="form-label">Last Name</label>
+									  <input type="text" class="form-control" placeholder="Last Name" name="last_name">
 									</div>
+								  </div>
+                                  <div class="col-md-4">
+									<div class="form-group">
+									  <label class="form-label">Gender</label>
+                                      <select class="form-select" name="gender">
+										<option>Male</option>
+										<option>Female</option>
+										<option>Other</option>										
+									  </select>
+									</div>
+								  </div>
 								</div>
+								<div class="row">
+								 
+								  <div class="col-md-4">
+									<div class="form-group">
+									  <label class="form-label">Date of Birth</label>
+									  <input type="datetime-local" class="form-control" placeholder="date" name="date_of_birth">
+									</div>
+								  </div>
+								</div>
+								<h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i> Contact Info </h4>
+								<hr class="my-15">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control" type="email" placeholder="email" name="email">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Contact Number</label>
+                                            <input class="form-control" type="tel" placeholder="Contact Number" name="phone_number">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Address</label>
+                                            <input class="form-control" type="text" placeholder="Address" name="address">
+                                          </div>
+                                    </div>
+                                   
+                                </div>		
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">County</label>
+                                            <select  class="form-select" name="county">
+                                                <option value="Baringo">Baringo</option>
+                                                <option value="Bomet">Bomet</option>
+                                                <option value="Bungoma">Bungoma</option>
+                                                <option value="Busia">Busia</option>
+                                                <option value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                                                <option value="Embu">Embu</option>
+                                                <option value="Garissa">Garissa</option>
+                                                <option value="Homa bay">Homa Bay</option>
+                                                <option value="Isiolo">Isiolo</option>
+                                                <option value="Kajiado">Kajiado</option>
+                                                <option value="Kakamega">Kakamega</option>
+                                                <option value="Kericho">Kericho</option>
+                                                <option value="Kiambu">Kiambu</option>
+                                                <option value="Kilifi">Kilifi</option>
+                                                <option value="Kirinyaga">Kirinyaga</option>
+                                                <option value="Kisii">Kisii</option>
+                                                <option value="Kisumu">Kisumu</option>
+                                                <option value="Kitui">Kitui</option>
+                                                <option value="Kwale">Kwale</option>
+                                                <option value="Laikipia">Laikipia</option>
+                                                <option value="Lamu">Lamu</option>
+                                                <option value="Machakos">Machakos</option>
+                                                <option value="Makueni">Makueni</option>
+                                                <option value="Mandera">Mandera</option>
+                                                <option value="Meru">Meru</option>
+                                                <option value="Migori">Migori</option>
+                                                <option value="Marsabit">Marsabit</option>
+                                                <option value="Mombasa">Mombasa</option>
+                                                <option value="Muranga">Muranga</option>
+                                                <option value="Nairobi">Nairobi</option>
+                                                <option value="Nakuru">Nakuru</option>
+                                                <option value="Nandi">Nandi</option>
+                                                <option value="Narok">Narok</option>
+                                                <option value="Nyamira">Nyamira</option>
+                                                <option value="Nyandarua">Nyandarua</option>
+                                                <option value="Nyeri">Nyeri</option>
+                                                <option value="Samburu">Samburu</option>
+                                                <option value="Siaya">Siaya</option>
+                                                <option value="Taita Taveta">Taita Taveta</option>
+                                                <option value="Tana River">Tana River</option>
+                                                <option value="Tharaka Nithi">Tharaka Nithi</option>
+                                                <option value="Trans Nzoia">Trans Nzoia</option>
+                                                <option value="Turkana">Turkana</option>
+                                                <option value="Uasin Gishu">Uasin Gishu</option>
+                                                <option value="Vihiga">Vihiga</option>
+                                                <option value="Wajir">Wajir</option>
+                                                <option value="Pokot">West Pokot</option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Town</label>
+                                            <input class="form-control" type="text" placeholder="Town" name="town">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Postal Code</label>
+                                            <input class="form-control" type="text" placeholder="Postal Code" name="postal_code">
+                                          </div>
+                                    </div>
+                                   
+                                </div>	
+                                <h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i> Emergency Contact Info </h4>
+								<hr class="my-15">				
+                                <div class="row">
+                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Emergency Contact Name</label>
+                                            <input class="form-control" type="text" placeholder="Emergency Contact Name" name="emergency_contact_name">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Emergency Contact Phone</label>
+                                            <input class="form-control" type="tel" placeholder="Phone" name="emergency_contact_phone">
+                                          </div>
+                                    </div>
+                                   
+                                </div>	
+								{{-- //emergency_contact_name --}}
+								
 							</div>
-						  </div>
-						</div>
-						<!-- /.box-body -->
+							<!-- /.box-body -->
+							<div class="box-footer text-end">
+								<button type="button" class="btn btn-warning me-1">
+								  <i class="ti-trash"></i> Cancel
+								</button>
+								<button type="submit" class="btn btn-primary">
+								  <i class="ti-save-alt"></i> Save
+								</button>
+							</div>  
+						</form>
 					  </div>
-					<div class="box">
-						<div class="box-header border-0 pb-0">
-							<h4 class="box-title">Disease History</h4>
-						</div>
-						<div class="box-body">
-							<div class="widget-timeline-icon">
-								<ul>
-									<li>
-										<div class="icon bg-primary fa fa-heart-o"></div>
-										<a class="timeline-panel text-muted" href="#">
-											<h4 class="mb-2 mt-1">Diabetes</h4>
-											<p class="fs-15 mb-0 ">mon, 18 Mar 2021, 11:15 AM</p>
-										</a>
-									</li>
-									<li>
-										<div class="icon bg-primary fa fa-heart-o"></div>
-										<a class="timeline-panel text-muted" href="#">
-											<h4 class="mb-2 mt-1">Sleep Problem</h4>
-											<p class="fs-15 mb-0 ">Tue, 21 Jun 2020, 03:22 PM</p>
-										</a>
-									</li>
-									<li>
-										<div class="icon bg-primary fa fa-heart-o"></div>
-										<a class="timeline-panel text-muted" href="#">
-											<h4 class="mb-2 mt-1">Dental Care</h4>
-											<p class="fs-15 mb-0 ">Wed, 15 Mar 2020, 02:11 PM</p>
-										</a>
-									</li>
-									<li>
-										<div class="icon bg-primary fa fa-heart-o"></div>
-										<a class="timeline-panel text-muted" href="#">
-											<h4 class="mb-2 mt-1">Diabetes</h4>
-											<p class="fs-15 mb-0 ">Sun, 11 Jan 2020, 12:24 PM</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="box-header">
-							<h4 class="box-title">Assigned Doctor</h4>
-						</div>
-						<div class="box-body">
-							<div class="d-flex align-items-center">
-								<img src="../images/avatar/avatar-10.png" class="w-100 bg-primary-light rounded10 me-15" alt="" />
-								<div>
-									<h4 class="mb-0">Dr. Johen Doe</h4>
-									<p class="text-muted">Physician</p>
-									<div class="d-flex">
-									  <i class="text-warning fa fa-star"></i>
-									  <i class="text-warning fa fa-star"></i>
-									  <i class="text-warning fa fa-star"></i>
-									  <i class="text-warning fa fa-star"></i>
-									  <i class="text-warning fa fa-star-half"></i>
-								    </div>
-								</div>
-							</div>
-							<div class="d-flex justify-content-between mt-15">
-								<a href="javascript:void(0);" class="btn btn-danger-light me-4">Unassign</a>
-								<a href="javascript:void(0);" class="btn btn-success-light ">Check</a>
-							</div>
-						</div>
-					</div>
+					  <!-- /.box -->			
 				</div>
-				<div class="col-xl-8 col-12">
-					<div class="d-md-flex align-items-center justify-content-between mb-20">
-						<a href="javascript:void(0);" class="btn btn-primary me-5 mb-md-0 mb-5"><i class="fa fa-edit"></i> Edit Profile</a>
-						<div class="d-flex">
-							<a href="javascript:void(0);" class="btn btn-outline btn-danger me-5"><i class="fa fa-times-circle-o"></i> Reject Patient</a>
-							<a href="javascript:void(0);" class="btn btn-success"><i class="fa fa-check-circle-o"></i> Accept Patient</a>
-						</div>
-					</div>
-					<div class="box">
-						<div class="box-body text-end min-h-150" style="background-image:url(../images/gallery/landscape14.jpg); background-repeat: no-repeat; background-position: center;background-size: cover;">
-						</div>
-						<div class="box-body wed-up position-relative">
-							<div class="d-md-flex align-items-center">
-								<div class=" me-20 text-center text-md-start">
-									<img src="../images/avatar/2.jpg" class="bg-success-light rounded10" alt="" />
-									<div class="text-center my-10">
-										<p class="mb-0">Disease</p>
-										<h4>Cold & Flu</h4>
-									</div>
-								</div>
-								<div class="mt-40">
-									<h4 class="fw-600 mb-5">Mical Doe</h4>
-									<h5 class="fw-500 mb-5">#p- 12458796</h5>
-									<p><i class="fa fa-clock-o"></i> Admin on 15 May 2021, 10:00 AM</p>
-								</div>
-							</div>
-						</div>
-						<div class="box-body pt-0">
-							<h4>Story About Disease</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xl-6 col-12">
-							<div class="box">
-								<div class="box-header">
-								  <h4 class="box-title">Current Vitals</h4>
-								  <div class="box-controls pull-right">
-									<div class="lookup lookup-circle lookup-right">
-									  <input type="text" name="s" placeholder="Patients id">
-									</div>
-								  </div>
-								</div>
-								<div class="box-body">
-								  <div class="flexbox bb-1 mb-15">
-									<div><p><span class="text-mute">Patient Name:</span> <strong>Jonsahn</strong></p></div>
-									<div><p><span class="text-mute">Patient Id:</span> <strong>1254896</strong></p></div>
-								  </div>
-								  <div class="row">
-									<div class="col-12">
-										<div class="row bb-1 pb-10">
-											<div class="col-4">
-												<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/weight.png" alt="">
-												<div>
-													<p class="mb-0"><small>Weight</small></p>
-													<h5 class="mb-0"><strong>230 ibs</strong></h5>
-												</div>
-											</div>
-											<div class="col-4 bs-1 be-1">
-												<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/human.png" alt="">
-												<div>
-													<p class="mb-0"><small>Height</small></p>
-													<h5 class=" mb-0"><strong>6’1</strong></h5>
-												</div>
-											</div>
-											<div class="col-4">
-												<img class="img-fluid float-start w-30 mt-10 me-10" src="../images/bmi.png" alt="">
-												<div>
-													<p class="mb-0"><small>BMI</small></p>
-													<h5 class="mb-0"><strong>30.34</strong></h5>
-												</div>
-											</div>
-										</div>
-										<div class="row pt-5">
-											<div class="col-12">
-												<span class="text-danger">Blood Pressure</span>
-											</div>
-											<div class="col-6">
-												<div class="progress progress-xs mb-0 mt-5 w-40">
-													<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-													</div>
-												</div>
-												<h2 class="float-start mt-0 mr-10"><strong>150</strong></h2>
-												<div>
-													<p class="mb-0"><small>Systolic</small></p>
-													<p class="mb-0 mt-0"><small class="vertical-align-super">mmHg</small></p>
-												</div>
-											</div>
-											<div class="col-6 bl-1">
-												<div class="progress progress-xs mb-0 mt-5 w-40">
-													<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-													</div>
-												</div>
-												<h2 class="float-start mt-0 mr-10"><strong>90</strong></h2>
-												<div>
-													<p class="mb-0"><small>Diastolic</small></p>
-													<p class="mb-0 mt-0"><small class="vertical-align-super">mmHg</small></p>
-												</div>
-											</div>
-										</div>
-									</div>
-								  </div>
-								</div>
-							  <div class="box-body pt-0">
-								<p><small>Recorded on 25/05/2018</small></p>
-							  </div>
-							  <div class="box-body bg-primary">
-								  <img src="../images/smoking.png" alt="" class="float-start me-10">
-								  <p>Smoking Status : current every day smoker</p>
-							  </div>
-							</div>
-						</div>
-						<div class="col-xl-6 col-12">
-							<div class="box">
-								<div class="box-header no-border">
-									<h4 class="box-title">Your Statistic</h4>
-								</div>
-								<div class="box-body">
-									<div id="chart123"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+
+				
+
+			
+		    </div>
+			
 
 		</section>
 		<!-- /.content -->
 	  </div>
   </div>
   <!-- /.content-wrapper -->
-
-   <footer class="main-footer">
+  <footer class="main-footer">
     <div class="pull-right d-none d-sm-inline-block">
         <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
 		  <li class="nav-item">
@@ -434,6 +387,7 @@
     </div>
 	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
   </footer>
+
   <!-- Control Sidebar -->
   <aside class="control-sidebar">
 
@@ -700,6 +654,7 @@
 
   <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+
 </div>
 <!-- ./wrapper -->
 
@@ -829,6 +784,7 @@
 	<!-- Page Content overlay -->
 
 
+	<!-- Vendor JS -->
 	<script src="{{asset('js/vendors.min.js')}}"></script>
 	<script src="{{asset('js/pages/chat-popup.js')}}"></script>
     <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
@@ -838,8 +794,6 @@
 	<!-- Doclinic App -->
 	<script src="{{asset('js/template.js')}}"></script>
 	<script src="{{asset('js/pages/patients.js')}}"></script>
-
-
 
 </body>
 

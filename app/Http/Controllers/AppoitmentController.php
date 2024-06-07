@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Appoitment;
 use Illuminate\Http\Request;
+use App\Models\Patient;
+use App\Models\DiagnosticCenters;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Log;
 
 class AppoitmentController extends Controller
 {
@@ -12,7 +16,9 @@ class AppoitmentController extends Controller
      */
     public function index()
     {
-        return view('admin.bookings.appointments');
+        $appointments = Appoitment::with('patient')->orderBy('id', 'DESC')->get();
+       
+        return view('admin.bookings.appointments',compact('appointments'));
     }
 
     /**
@@ -20,17 +26,42 @@ class AppoitmentController extends Controller
      */
     public function create()
     {
-        //
+        $patients= Patient::all();
+        $centers= DiagnosticCenters::all();
+        return view('admin.bookings.add_appointment',compact('patients','centers'));
     }
 
     /**
      * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+     */  // 'patient_id','symptoms','severity_desease','allergies','date_time','appointment_reason','appointment_type','center','notes'
+  
+     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'patient_id' => 'required',
+            'symptoms' => 'required|string|max:255',
+            'date_time' => 'required|date',
+            'severity_desease' => 'required|string|max:255',
+            'allergies' => 'nullable|string|max:255',
+            'appointment_reason' => 'nullable|string|max:255',
+            'appointment_type' => 'nullable|string|max:20',
+            'center' => 'nullable|string|max:255',           
+            'notes' => 'nullable|string|max:255',            
+        ]);
+
+        // Create a new appointment record
+        $appoitment = Appoitment::create($validatedData);
+        Alert::success('Appointment', 'You\'ve Successfully Booked');
+        return redirect()->back();
+        // Return a response
+        return response()->json([
+            'message' => 'Appoitment created successfully',
+            'appointment' => $appoitment
+        ], 201);
     }
 
+// 'patient_id','symptoms','severity_desease','allergies','date_time','appointment_reason','appointment_type','center','notes'
     /**
      * Display the specified resource.
      */
@@ -60,6 +91,6 @@ class AppoitmentController extends Controller
      */
     public function destroy(Appoitment $appoitment)
     {
-        //
+        
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\AppoitmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RiskAssessmentController;
+use App\Http\Controllers\DiagnosticCentersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +30,29 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('appointment')->group(function () {
         Route::get('index',[AppoitmentController::class,'index'])->name('app_index');
-        Route::get('create',[AppoitmentController::class,'create'])->name('app_create');
+        Route::get('add',[AppoitmentController::class,'create'])->name('app_create');
         Route::post('create',[AppoitmentController::class,'store'])->name('app_store');
     });
 
     Route::prefix('patients')->group(function () {
         Route::get('view',[PatientController::class,'index']);
+        Route::get('add',[PatientController::class,'create'])->name('add');
+        Route::post('patient_store',[PatientController::class,'store'])->name('patient_store');
+        Route::get('/patient_details/{id}',[PatientController::class,'show'])->name('patient_details');
+        Route::get('/edit/{id}',[PatientController::class,'edit'])->name('edit');
+        Route::put('patient_edit',[PatientController::class,'update'])->name('patient_edit');
     });
+
 });
+Route::prefix('centers')->group(function () {
+    Route::get('view',[DiagnosticCentersController::class,'index']);
+    Route::get('add',[DiagnosticCentersController::class,'create'])->name('add');
+    Route::post('center_store',[DiagnosticCentersController::class,'store'])->name('center_store');
+    Route::get('/edit/{id}',[DiagnosticCentersController::class,'edit'])->name('edit');
+    Route::put('center_edit',[DiagnosticCentersController::class,'update'])->name('center_edit');
+    Route::get('/delete/{id}',[DiagnosticCentersController::class,'destroy'])->name('delete');
+});
+
 
 
 Route::get('patient_details', function () {
