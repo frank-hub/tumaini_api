@@ -33,6 +33,10 @@ class RiskAssessmentController extends Controller
 
         // Perform validation on the input data
         $validatedData = $request->validate([
+            'riskscore' => 'nullable',
+            'full_name' => 'required',
+            'county' => 'required',
+            'town' => 'required',
             'age' => 'required|min:0',
             'gender' => 'required|in:Male,Female',
             'hemoglobin' => 'required|min:0',
@@ -42,8 +46,12 @@ class RiskAssessmentController extends Controller
             // Add more validation rules for other input variables
         ]);
 
+
         // Calculate risk score based on patient data
         $riskScore = $this->calculateRiskScore($validatedData);
+
+        $validatedData['riskscore'] = $riskScore;
+        RiskAssessment::create($validatedData);
 
         // Return the risk score as a JSON response
         if ($request->wantsJson()) {

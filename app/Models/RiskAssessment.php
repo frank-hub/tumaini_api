@@ -10,11 +10,15 @@ class RiskAssessment extends Model
     use HasFactory;
 
     protected $fillable = [
+        'full_name',
         'age',
         'gender',
         'hemoglobin',
         'pain_episodes',
         'complications',
-        'medication_use'
+        'medication_use',
+        'riskscore',
+        'county',
+        'town',
     ];
 }

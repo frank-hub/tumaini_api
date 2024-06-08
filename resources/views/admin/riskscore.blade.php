@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,17 +10,17 @@
     <meta name="author" content="">
     <link rel="icon" href="https://medical-admin-template.multipurposethemes.com/images/favicon.ico">
 
-    <title>Tumaini Sickle Cell App</title>
+    <title>Tumaini Sickle Cell - Dashboard</title>
 
 	<!-- Vendors Style-->
-	<link rel="stylesheet" href="css/vendors_css.css">
+	<link rel="stylesheet" href="{{asset('css/vendors_css.css')}}">
 
 	<!-- Style-->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/skin_color.css">
+	<link rel="stylesheet" href="{{asset('css/style.css')}}">
+	<link rel="stylesheet" href="{{asset('css/skin_color.css')}}">
 
   </head>
-
+  @include('sweetalert::alert')
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
 
 <div class="wrapper">
@@ -31,12 +32,12 @@
 		<a href="index.html" class="logo">
 		  <!-- logo-->
 		  <div class="logo-mini w-50">
-			  <span class="light-logo"><img src="images/logo-letter.png" alt="logo"></span>
-			  <span class="dark-logo"><img src="images/logo-letter.png" alt="logo"></span>
+			  <span class="light-logo"><img src="../images/logo-letter.png" alt="logo"></span>
+			  <span class="dark-logo"><img src="../images/logo-letter.png" alt="logo"></span>
 		  </div>
 		  <div class="logo-lg">
-			  <span class="light-logo"><img src="images/logo-dark-text.png" alt="logo"></span>
-			  <span class="dark-logo"><img src="images/logo-light-text.png" alt="logo"></span>
+			  <span class="light-logo"><img src="../images/logo-dark-text.png" alt="logo"></span>
+			  <span class="dark-logo"><img src="../images/logo-light-text.png" alt="logo"></span>
 		  </div>
 		</a>
 	</div>
@@ -166,355 +167,198 @@
       </div>
     </nav>
   </header>
-  @include('layouts.aside')
+@include('layouts.aside')
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 	  <div class="container-full">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="me-auto">
+					<h4 class="page-title">Riskscore</h4>
+					<div class="d-inline-block align-items-center">
+						<nav>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+								<li class="breadcrumb-item active" aria-current="page">Form</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-xxxl-9 col-xl-8 col-12">
-					<div class="box">
-						<div class="box-body">
-							<div class="d-md-flex align-items-center text-md-start text-center">
-								<div class="me-md-30">
-									<img src="https://medical-admin-template.multipurposethemes.com/images/svg-icon/color-svg/custom-21.svg" alt="" class="w-150" />
-								</div>
-								<div class="d-lg-flex w-p100 align-items-center justify-content-between">
-									<div class="me-lg-10 mb-lg-0 mb-10">
-										<h3 class="mb-0">Today - Do A Sickle Cell Risk Score Assessment</h3>
-										<p class="mb-0 fs-16">The Package includes: 1,2,3</p>
-									</div>
-									<div>
-										<a href="{{url('/riskscore/form')}}" class="waves-effect waves-light btn btn-danger text-nowrap">Risk Score</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-4 col-12">
-							<div class="box">
-								<div class="box-body">
-									<div class="d-flex align-items-center">
-										<div class="me-15">
-											<img src="https://medical-admin-template.multipurposethemes.com/images/svg-icon/color-svg/custom-20.svg" alt="" class="w-120" />
-										</div>
-										<div>
-											<h4 class="mb-0">Total Patients</h4>
-											<h3 class="mb-0">1245</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-12">
-							<div class="box">
-								<div class="box-body">
-									<div class="d-flex align-items-center">
-										<div class="me-15">
-											<img src="https://medical-admin-template.multipurposethemes.com/images/svg-icon/color-svg/custom-18.svg" alt="" class="w-120" />
-										</div>
-										<div>
-											<h4 class="mb-0">Diagnostic Centers</h4>
-											<h3 class="mb-0">145</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-12">
-							<div class="box">
-								<div class="box-body">
-									<div class="d-flex align-items-center">
-										<div class="me-15">
-											<img src="https://medical-admin-template.multipurposethemes.com/images/svg-icon/color-svg/custom-19.svg" alt="" class="w-120" />
-										</div>
-										<div>
-											<h4 class="mb-0">Total Diagnosis</h4>
-											<h3 class="mb-0">245</h3>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-12 col-12">
-							<div class="box">
-								<div class="box-header">
-									<h4 class="box-title">Patient Statistics</h4>
-								</div>
-								<div class="box-body">
-									<div id="patient_statistics"></div>
-								</div>
-							</div>
-						</div>
 
-						<div class="col-12">
-						  <div class="box">
-							<div class="box-header with-border">
-							  <h4 class="box-title">Admitted Patient</h4>
-							  <div class="box-controls pull-right">
-								<div class="lookup lookup-circle lookup-right">
-								  <input type="text" name="s">
-								</div>
-							  </div>
-							</div>
-							<div class="box-body no-padding">
-								<div class="table-responsive">
-								  	<table class="table mb-0">
-										<tbody>
-											<tr class="bg-info-light">
-											  <th>No</th>
-											  <th>Date</th>
-											  <th>ID</th>
-											  <th>Name</th>
-											  <th>Age</th>
-											  <th>Country</th>
-											  <th>Gender</th>
-											  <th>Settings</th>
-											</tr>
-											<tr>
-											  <td>01</td>
-											  <td>01/08/2021</td>
-											  <td>DO-124585</td>
-											  <td><strong>Shawn Hampton</strong></td>
-											  <td>27</td>
-											  <td>Miami</td>
-											  <td>Male</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>02</td>
-											  <td>01/08/2021</td>
-											  <td>DO-412577</td>
-											  <td><strong>Polly Paul</strong></td>
-											  <td>31</td>
-											  <td>Naples</td>
-											  <td>Female</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>03</td>
-											  <td>01/08/2021</td>
-											  <td>DO-412151</td>
-											  <td><strong>Harmani Doe</strong></td>
-											  <td>21</td>
-											  <td>Destin</td>
-											  <td>Female</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>04</td>
-											  <td>01/08/2021</td>
-											  <td>DO-123654</td>
-											  <td><strong>Mark Wood</strong></td>
-											  <td>30</td>
-											  <td>Orlando</td>
-											  <td>Male</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>05</td>
-											  <td>01/08/2021</td>
-											  <td>DO-159874</td>
-											  <td><strong>Johen Doe</strong></td>
-											  <td>58</td>
-											  <td>Tampa</td>
-											  <td>Male</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div class="box-footer bg-light py-10 with-border">
-							    <div class="d-flex align-items-center justify-content-between">
-									<p class="mb-0">Total 90 Patient</p>
-									<a type="button" class="waves-effect waves-light btn btn-primary">View All</a>
-								</div>
-							</div>
-						  </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xxxl-3 col-xl-4 col-12">
-					<div class="box">
-						<div class="box-header">
-							<h4 class="box-title">Total Patient</h4>
-						</div>
-						<div class="box-body">
-							<div id="total_patient"></div>
-						</div>
-					</div>
-					<div class="box">
+            <div class="col-lg-1"></div>
+				<div class="col-lg-10 col-12">
+					  <div class="box">
 						<div class="box-header with-border">
-							<h4 class="box-title">Diagnostic Centers</h4>
-							<p class="mb-0 pull-right">View All</p>
+						  <h4 class="box-title">Risk Score Details</h4>
 						</div>
-						<div class="box-body">
-							<div class="inner-user-div3">
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-1.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
+						<!-- /.box-header -->
+                        <form method="POST" action="{{url('riskscore')}}">
+                            @csrf
+							<div class="box-body">
+								<h4 class="box-title text-info mb-0"><i class="ti-user me-15"></i> Basic Info</h4>
+								<hr class="my-15">
+								<div class="row">
+								  <div class="col-md-4">
+                                <input type="text" name="riskscore" readonly hidden id="">
+									<div class="form-group">
+									  <label class="form-label">Full Name</label>
+									  <input type="text" class="form-control" placeholder="Full Name" name="full_name">
 									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-primary mb-1 fs-16">Dr. Jaylon Stanton</a>
-										<span class="text-fade">Dentist</span>
+								  </div>
+								  <div class="col-md-4">
+									<div class="form-group">
+									  <label class="form-label">Age</label>
+									  <input type="number" class="form-control" placeholder="Age" name="age">
 									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
+								  </div>
+                                  <div class="col-md-4">
+									<div class="form-group">
+									  <label class="form-label">Gender</label>
+                                      <select class="form-select" name="gender">
+										<option>Male</option>
+										<option>Female</option>
+										<option>Other</option>
+									  </select>
 									</div>
+								  </div>
 								</div>
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-10.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-danger mb-1 fs-16">Dr. Carla Schleifer</a>
-										<span class="text-fade">Oculist</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-11.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-success mb-1 fs-16">Dr. Hanna Geidt</a>
-										<span class="text-fade">Surgeon</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-12.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-info mb-1 fs-16">Dr. Roger George</a>
-										<span class="text-fade">General Practitioners</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-15.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-warning mb-1 fs-16">Dr. Natalie doe</a>
-										<span class="text-fade">Physician</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
+								<h4 class="box-title text-info mb-0 mt-20"><i class="ti-envelope me-15"></i> Contact Info </h4>
+								<hr class="my-15">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Hemoglobin Level:</label>
+                                            <input class="form-control" type="number" placeholder="Hemoglobin Level" name="hemoglobin">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Pain Episodes:</label>
+                                            <input class="form-control" type="number" placeholder="Pain Episodes:" name="pain_episodes">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Complications</label>
+                                            <input class="form-control" type="number" placeholder="Complications" name="complications">
+                                          </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">County</label>
+                                            <select  class="form-select" name="county">
+                                                <option value="Baringo">Baringo</option>
+                                                <option value="Bomet">Bomet</option>
+                                                <option value="Bungoma">Bungoma</option>
+                                                <option value="Busia">Busia</option>
+                                                <option value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                                                <option value="Embu">Embu</option>
+                                                <option value="Garissa">Garissa</option>
+                                                <option value="Homa bay">Homa Bay</option>
+                                                <option value="Isiolo">Isiolo</option>
+                                                <option value="Kajiado">Kajiado</option>
+                                                <option value="Kakamega">Kakamega</option>
+                                                <option value="Kericho">Kericho</option>
+                                                <option value="Kiambu">Kiambu</option>
+                                                <option value="Kilifi">Kilifi</option>
+                                                <option value="Kirinyaga">Kirinyaga</option>
+                                                <option value="Kisii">Kisii</option>
+                                                <option value="Kisumu">Kisumu</option>
+                                                <option value="Kitui">Kitui</option>
+                                                <option value="Kwale">Kwale</option>
+                                                <option value="Laikipia">Laikipia</option>
+                                                <option value="Lamu">Lamu</option>
+                                                <option value="Machakos">Machakos</option>
+                                                <option value="Makueni">Makueni</option>
+                                                <option value="Mandera">Mandera</option>
+                                                <option value="Meru">Meru</option>
+                                                <option value="Migori">Migori</option>
+                                                <option value="Marsabit">Marsabit</option>
+                                                <option value="Mombasa">Mombasa</option>
+                                                <option value="Muranga">Muranga</option>
+                                                <option value="Nairobi">Nairobi</option>
+                                                <option value="Nakuru">Nakuru</option>
+                                                <option value="Nandi">Nandi</option>
+                                                <option value="Narok">Narok</option>
+                                                <option value="Nyamira">Nyamira</option>
+                                                <option value="Nyandarua">Nyandarua</option>
+                                                <option value="Nyeri">Nyeri</option>
+                                                <option value="Samburu">Samburu</option>
+                                                <option value="Siaya">Siaya</option>
+                                                <option value="Taita Taveta">Taita Taveta</option>
+                                                <option value="Tana River">Tana River</option>
+                                                <option value="Tharaka Nithi">Tharaka Nithi</option>
+                                                <option value="Trans Nzoia">Trans Nzoia</option>
+                                                <option value="Turkana">Turkana</option>
+                                                <option value="Uasin Gishu">Uasin Gishu</option>
+                                                <option value="Vihiga">Vihiga</option>
+                                                <option value="Wajir">Wajir</option>
+                                                <option value="Pokot">West Pokot</option>
+                                            </select>
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Town</label>
+                                            <input class="form-control" type="text" placeholder="Town" name="town">
+                                          </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-label">Medication Use:</label>
+                                            <input class="form-control" type="number" placeholder="Medication Use" name="medication_use">
+                                          </div>
+                                    </div>
+
+                                </div>
+
+								{{-- //emergency_contact_name --}}
+
 							</div>
-						</div>
-					</div>
+							<!-- /.box-body -->
+							<div class="box-footer text-end">
+								<button type="button" class="btn btn-warning me-1">
+								  <i class="ti-trash"></i> Cancel
+								</button>
+								<button type="submit" class="btn btn-primary">
+								  <i class="ti-save-alt"></i> Save
+								</button>
+							</div>
+						</form>
+					  </div>
+					  <!-- /.box -->
 				</div>
-			</div>
+
+
+
+
+		    </div>
+
+
 		</section>
 		<!-- /.content -->
 	  </div>
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-
+    <div class="pull-right d-none d-sm-inline-block">
+        <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+		  <li class="nav-item">
+			<a class="nav-link" href="https://themeforest.net/item/doclinic-medical-responsive-bootstrap-admin-dashboard/32737529">Purchase Now</a>
+		  </li>
+		</ul>
+    </div>
 	  &copy; <script>document.write(new Date().getFullYear())</script> <a href="https://www.multipurposethemes.com/">Multipurpose Themes</a>. All Rights Reserved.
   </footer>
 
@@ -788,7 +632,19 @@
 </div>
 <!-- ./wrapper -->
 
-
+	<!-- ./side demo panel -->
+	<div class="sticky-toolbar">
+	    <a href="https://themeforest.net/item/doclinic-medical-responsive-bootstrap-admin-dashboard/32737529" data-bs-toggle="tooltip" data-bs-placement="left" title="Buy Now" class="waves-effect waves-light btn btn-success btn-flat mb-5 btn-sm" target="_blank">
+			<span class="icon-Money"><span class="path1"></span><span class="path2"></span></span>
+		</a>
+	    <a href="https://themeforest.net/user/multipurposethemes/portfolio" data-bs-toggle="tooltip" data-bs-placement="left" title="Portfolio" class="waves-effect waves-light btn btn-danger btn-flat mb-5 btn-sm" target="_blank">
+			<span class="icon-Image"></span>
+		</a>
+	    <a id="chat-popup" href="#" data-bs-toggle="tooltip" data-bs-placement="left" title="Live Chat" class="waves-effect waves-light btn btn-warning btn-flat btn-sm">
+			<span class="icon-Group-chat"><span class="path1"></span><span class="path2"></span></span>
+		</a>
+	</div>
+	<!-- Sidebar -->
 
 	<div id="chat-box-body">
 		<div id="chat-circle" class="waves-effect waves-circle btn btn-circle btn-sm btn-warning l-h-50">
@@ -903,16 +759,15 @@
 
 
 	<!-- Vendor JS -->
-	<script src="js/vendors.min.js"></script>
-	<script src="js/pages/chat-popup.js"></script>
-    <script src="assets/icons/feather-icons/feather.min.js"></script>
+	<script src="{{asset('js/vendors.min.js')}}"></script>
+	<script src="{{asset('js/pages/chat-popup.js')}}"></script>
+    <script src="{{asset('assets/icons/feather-icons/feather.min.js')}}"></script>
 
-	<script src="assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
-	<script src="assets/vendor_components/OwlCarousel2/dist/owl.carousel.js"></script>
+	<script src="{{asset('assets/vendor_components/datatable/datatables.min.js')}}"></script>
 
 	<!-- Doclinic App -->
-	<script src="js/template.js"></script>
-	<script src="js/pages/dashboard3.js"></script>
+	<script src="{{asset('js/template.js')}}"></script>
+	<script src="{{asset('js/pages/patients.js')}}"></script>
 
 </body>
 

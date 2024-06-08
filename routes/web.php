@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('admin.auth_login');
 });
 
+Route::get('/riskscore/form', function () {
+    return view('admin.riskscore');
+});
+
 Route::post('riskscore',[RiskAssessmentController::class,'calculateRisk']);
 
 
@@ -36,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/{id}',[AppoitmentController::class,'edit'])->name('edit');
         Route::put('app_edit',[AppoitmentController::class,'update'])->name('app_edit');
         Route::get('/delete/{id}',[AppoitmentController::class,'destroy'])->name('delete');
-        
+
     });
 
     Route::prefix('patients')->group(function () {
