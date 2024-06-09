@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="https://medical-admin-template.multipurposethemes.com/images/favicon.ico">
 
-    <title>Doclinic - Dashboard</title>
+    <title>Tumaini - Dashboard</title>
 
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="css/vendors_css.css">
@@ -73,7 +73,7 @@
 				<a href="#" class="waves-effect waves-light dropdown-toggle w-auto l-h-12 bg-transparent p-0 no-shadow" data-bs-toggle="dropdown" title="User">
 					<div class="d-flex pt-1">
 						<div class="text-end me-10">
-							<p class="pt-5 fs-14 mb-0 fw-700 text-primary">Johen Doe</p>
+							<p class="pt-5 fs-14 mb-0 fw-700 text-primary">{{Auth::user()->name}}</p>
 							<small class="fs-10 mb-0 text-uppercase text-mute">Admin</small>
 						</div>
 						<img src="../images/avatar/avatar-1.png" class="avatar rounded-10 bg-primary-light h-40 w-40" alt="" />
@@ -196,157 +196,54 @@
 				<div class="col-12">
 				  <div class="box">
 					<div class="box-body">
-					  <h4 class="box-title">Radiology List</h4>
+					  <h4 class="box-title">Risk Score List</h4>
 						<div class="table-responsive">
 							<table class="table table-striped table-hover">
 								<thead>
 									<tr>
 										<th class="bb-2">No.</th>
-										<th class="bb-2">Test</th>
-										<th class="bb-2">Lab</th>
-										<th class="bb-2">Priority</th>
-										<th class="bb-2">Cost</th>
-										<th class="bb-2">Handling</th>
-										<th class="bb-2">Coll. By</th>
-										<th class="bb-2">Status</th>
-										<th class="bb-2">Result</th>
-										<th class="bb-2">Signed</th>
+										<th class="bb-2">Name</th>
+										<th class="bb-2">Age</th>
+										<th class="bb-2">Gender</th>
+										<th class="bb-2">Riskscore</th>
+										<th class="bb-2">Hemoglobin</th>
+										<th class="bb-2">County</th>
+										<th class="bb-2">Pain Episodes</th>
+										<th class="bb-2">Medication Use</th>
+										<th class="bb-2">Complications</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>CMS</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-danger">High</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Covid</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Urin</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-danger">High</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>Blood Count</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-danger">High</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>HB</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>MD</td>
-										<td>Microbiology</td>
-										<td><span class="badge badge-warning">Law</span></td>
-										<td>N500</td>
-										<td>Johen Doe</td>
-										<td>5.45pm 11/05</td>
-										<td><span class="badge badge-success">Result Added</span></td>
-										<td>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#result" class="text-info">Result  </a>
-											<a href="#" data-bs-toggle="modal" data-bs-target="#comment-dialog" class="text-info">Comment  </a>
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-toggle" data-bs-toggle="button" aria-pressed="false">
-											<span class="handle"></span>
-											</button>
-										</td>
-									</tr>
+                                    @foreach ($riskScores as $riskScore)
+                                        <tr>
+                                            <td>{{$riskScore->id}}</td>
+                                            <td>{{$riskScore->full_name}}</td>
+                                            <td>{{$riskScore->age}}</td>
+                                            <td><span class="badge badge-warning">{{$riskScore->gender}}</span></td>
+                                            <td>
+                                                @if ($riskScore->riskscore >= 1 && $riskScore->riskscore <= 3)
+                                                    <span class="badge badge-info">Low Risk:{{$riskScore->riskscore}}</span>
+                                                @elseif ($riskScore->riskscore >= 4 && $riskScore->riskscore <= 6)
+                                                    <span class="badge badge-warning">Moderate Risk:{{$riskScore->riskscore}}</span>
+                                                @elseif ($riskScore->riskscore >= 7 && $riskScore->riskscore <= 9)
+                                                    <span class="badge badge-danger">High Risk {{$riskScore->riskscore}}</span>
+                                                @elseif ($riskScore->riskscore >= 10)
+                                                    <span class="badge badge-dark">Very High Risk {{$riskScore->riskscore}}</span>
+                                                @else
+                                                    <span class="badge badge-secondary">Unknown Risk</span>
+                                                @endif
+                                            </td>
+                                            <td>{{$riskScore->hemoglobin}}</td>
+                                            <td>{{$riskScore->county}}-{{$riskScore->town}}</td>
+                                            <td>{{$riskScore->pain_episodes}}</td>
+                                            <td>
+                                                {{$riskScore->medication_use}}
+                                            </td>
+                                            <td>
+                                                {{$riskScore->complications}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
 								</tbody>
 							  </table>
 						</div>
@@ -367,7 +264,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="result-popup">Radiology Investigations - Result</h4>
+					<h4 class="modal-title" id="result-popup">Risk Score Investigations - Result</h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
@@ -438,7 +335,7 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="comment-popup">Radiology Investigations - Comment</h4>
+					<h4 class="modal-title" id="comment-popup">Risk Score Investigations - Comment</h4>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
@@ -469,7 +366,6 @@
     <div class="pull-right d-none d-sm-inline-block">
         <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
 		  <li class="nav-item">
-			<a class="nav-link" href="https://themeforest.net/item/doclinic-medical-responsive-bootstrap-admin-dashboard/32737529">Purchase Now</a>
 		  </li>
 		</ul>
     </div>

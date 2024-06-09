@@ -33,7 +33,7 @@
 								<p class="mb-0">Register a new membership</p>
 							</div>
 							<div class="p-40">
-								<form method="POST" action="{{ route('register') }}">
+								<form method="POST" action="{{ route('auth_register') }}">
                                     @csrf
 									<div class="form-group">
 										<div class="input-group mb-3">

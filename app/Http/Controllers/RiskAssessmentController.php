@@ -12,7 +12,9 @@ class RiskAssessmentController extends Controller
      */
     public function index()
     {
-        //
+        $riskScores = RiskAssessment::orderBy('id','desc')->get();
+
+        return view('admin.reports',compact('riskScores'));
     }
 
     /**
@@ -125,4 +127,5 @@ class RiskAssessmentController extends Controller
 
         return $riskScore;
     }
+
 }

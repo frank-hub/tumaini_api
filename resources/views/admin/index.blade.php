@@ -17,7 +17,36 @@
 	<!-- Style-->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/skin_color.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawChart);
 
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['County', 'Patients'],
+                @foreach ($patientCounts as $county => $count)
+                    ['{{ $county }}', {{ $count }}],
+                @endforeach
+            ]);
+
+            var options = {
+                title: 'Patient Counts by County',
+                chartArea: {width: '50%'},
+                hAxis: {
+                    title: 'County',
+                },
+                vAxis: {
+                    title: 'Total Patients',
+                    minValue: 0
+                }
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('column_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
   </head>
 
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed">
@@ -28,7 +57,7 @@
   <header class="main-header">
 	<div class="d-flex align-items-center logo-box justify-content-start">
 		<!-- Logo -->
-		<a href="index.html" class="logo">
+		<a href="{{url('/')}}" class="logo">
 		  <!-- logo-->
 		  <div class="logo-mini w-50">
 			  <span class="light-logo"><img src="images/logo-letter.png" alt="logo"></span>
@@ -202,7 +231,7 @@
 										</div>
 										<div>
 											<h4 class="mb-0">Total Patients</h4>
-											<h3 class="mb-0">1245</h3>
+											<h3 class="mb-0">{{$patientC}}</h3>
 										</div>
 									</div>
 								</div>
@@ -217,7 +246,7 @@
 										</div>
 										<div>
 											<h4 class="mb-0">Diagnostic Centers</h4>
-											<h3 class="mb-0">145</h3>
+											<h3 class="mb-0">{{$centers}}</h3>
 										</div>
 									</div>
 								</div>
@@ -232,7 +261,7 @@
 										</div>
 										<div>
 											<h4 class="mb-0">Total Diagnosis</h4>
-											<h3 class="mb-0">245</h3>
+											<h3 class="mb-0">{{$ristCount}}</h3>
 										</div>
 									</div>
 								</div>
@@ -241,272 +270,16 @@
 						<div class="col-xl-12 col-12">
 							<div class="box">
 								<div class="box-header">
-									<h4 class="box-title">Patient Statistics</h4>
+									<h4 class="box-title">Riskscore Statistics</h4>
 								</div>
 								<div class="box-body">
-									<div id="patient_statistics"></div>
+                                    <div id="column_chart" style="width: 900px; height: 500px;"></div>
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
 
-						<div class="col-12">
-						  <div class="box">
-							<div class="box-header with-border">
-							  <h4 class="box-title">Admitted Patient</h4>
-							  <div class="box-controls pull-right">
-								<div class="lookup lookup-circle lookup-right">
-								  <input type="text" name="s">
-								</div>
-							  </div>
-							</div>
-							<div class="box-body no-padding">
-								<div class="table-responsive">
-								  	<table class="table mb-0">
-										<tbody>
-											<tr class="bg-info-light">
-											  <th>No</th>
-											  <th>Date</th>
-											  <th>ID</th>
-											  <th>Name</th>
-											  <th>Age</th>
-											  <th>Country</th>
-											  <th>Gender</th>
-											  <th>Settings</th>
-											</tr>
-											<tr>
-											  <td>01</td>
-											  <td>01/08/2021</td>
-											  <td>DO-124585</td>
-											  <td><strong>Shawn Hampton</strong></td>
-											  <td>27</td>
-											  <td>Miami</td>
-											  <td>Male</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>02</td>
-											  <td>01/08/2021</td>
-											  <td>DO-412577</td>
-											  <td><strong>Polly Paul</strong></td>
-											  <td>31</td>
-											  <td>Naples</td>
-											  <td>Female</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>03</td>
-											  <td>01/08/2021</td>
-											  <td>DO-412151</td>
-											  <td><strong>Harmani Doe</strong></td>
-											  <td>21</td>
-											  <td>Destin</td>
-											  <td>Female</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>04</td>
-											  <td>01/08/2021</td>
-											  <td>DO-123654</td>
-											  <td><strong>Mark Wood</strong></td>
-											  <td>30</td>
-											  <td>Orlando</td>
-											  <td>Male</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-											<tr>
-											  <td>05</td>
-											  <td>01/08/2021</td>
-											  <td>DO-159874</td>
-											  <td><strong>Johen Doe</strong></td>
-											  <td>58</td>
-											  <td>Tampa</td>
-											  <td>Male</td>
-											  <td>
-												  <div class="d-flex">
-												  	  <a href="#" class="waves-effect waves-circle btn btn-circle btn-success btn-xs me-5"><i class="fa fa-pencil"></i></a>
-													  <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger btn-xs"><i class="fa fa-trash"></i></a>
-												  </div>
-											  </td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<div class="box-footer bg-light py-10 with-border">
-							    <div class="d-flex align-items-center justify-content-between">
-									<p class="mb-0">Total 90 Patient</p>
-									<a type="button" class="waves-effect waves-light btn btn-primary">View All</a>
-								</div>
-							</div>
-						  </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xxxl-3 col-xl-4 col-12">
-					<div class="box">
-						<div class="box-header">
-							<h4 class="box-title">Total Patient</h4>
-						</div>
-						<div class="box-body">
-							<div id="total_patient"></div>
-						</div>
-					</div>
-					<div class="box">
-						<div class="box-header with-border">
-							<h4 class="box-title">Diagnostic Centers</h4>
-							<p class="mb-0 pull-right">View All</p>
-						</div>
-						<div class="box-body">
-							<div class="inner-user-div3">
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-1.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-primary mb-1 fs-16">Dr. Jaylon Stanton</a>
-										<span class="text-fade">Dentist</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-10.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-danger mb-1 fs-16">Dr. Carla Schleifer</a>
-										<span class="text-fade">Oculist</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-11.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-success mb-1 fs-16">Dr. Hanna Geidt</a>
-										<span class="text-fade">Surgeon</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center mb-30">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-12.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-info mb-1 fs-16">Dr. Roger George</a>
-										<span class="text-fade">General Practitioners</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center">
-									<div class="me-15">
-										<img src="../images/avatar/avatar-15.png" class="avatar avatar-lg rounded10 bg-primary-light" alt="" />
-									</div>
-									<div class="d-flex flex-column flex-grow-1 fw-500">
-										<a href="#" class="text-dark hover-warning mb-1 fs-16">Dr. Natalie doe</a>
-										<span class="text-fade">Physician</span>
-									</div>
-									<div class="dropdown">
-										<a class="px-10 pt-5" href="#" data-bs-toggle="dropdown"><i class="ti-more-alt"></i></a>
-										<div class="dropdown-menu dropdown-menu-end">
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Inbox</span>
-											<span class="badge badge-pill badge-info">5</span>
-										  </a>
-										  <a class="dropdown-item" href="#">Sent</a>
-										  <a class="dropdown-item" href="#">Spam</a>
-										  <div class="dropdown-divider"></div>
-										  <a class="dropdown-item flexbox" href="#">
-											<span>Draft</span>
-											<span class="badge badge-pill badge-default">1</span>
-										  </a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</section>
 		<!-- /.content -->

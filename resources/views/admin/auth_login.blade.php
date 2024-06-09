@@ -33,7 +33,7 @@
 								<p class="mb-0">Sign in to continue to Tumaini SCDA.</p>
 							</div>
 							<div class="p-40">
-								<form  method="POST" action="{{ route('login') }}">
+								<form  method="POST" action="{{ route('auth_login') }}">
                                     @csrf
 
 									<div class="form-group">
