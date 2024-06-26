@@ -15,69 +15,25 @@ class Dashboard extends Controller
         $centers = DiagnosticCenters::count();
         $ristCount = RiskAssessment::count();
         // dd($patientC);
-        $counties = [
-            'Kisumu',
-            'Baringo',
-            'Bomet',
-            'Bungoma',
-            'Busia',
-            'Elgeyo Marakwet',
-            'Embu',
-            'Garissa',
-            'Homa Bay',
-            'Isiolo',
-            'Kajiado',
-            'Kakamega',
-            'Kericho',
-            'Kiambu',
-            'Kilifi',
-            'Kirinyaga',
-            'Kisii',
-            'Kitui',
-            'Kwale',
-            'Laikipia',
-            'Lamu',
-            'Machakos',
-            'Makueni',
-            'Mandera',
-            'Meru',
-            'Migori',
-            'Marsabit',
-            'Mombasa',
-            'Muranga',
-            'Nairobi',
-            'Nakuru',
-            'Nandi',
-            'Narok',
-            'Nyamira',
-            'Nyandarua',
-            'Nyeri',
-            'Samburu',
-            'Siaya',
-            'Taita Taveta',
-            'Tana River',
-            'Tharaka Nithi',
-            'Trans Nzoia',
-            'Turkana',
-            'Uasin Gishu',
-            'Vihiga',
-            'Wajir',
-            'Pokot'
+        $genders = [
+            'Male',
+            'Female',
+            'Other'
         ];
-        $patientCounts = RiskAssessment::whereIn('county', $counties)
-            ->select('county', \DB::raw('count(*) as total'))
-            ->groupBy('county')
+        $genderCounts = RiskAssessment::whereIn('gender', $genders)
+            ->select('gender', \DB::raw('count(*) as total'))
+            ->groupBy('gender')
             ->get()
-            ->pluck('total', 'county')
+            ->pluck('total', 'gender')
             ->toArray();
 
         // Ensure all counties are present in the array
-        foreach ($counties as $county) {
-            if (!isset($patientCounts[$county])) {
-                $patientCounts[$county] = 0;
+        foreach ($genders as $gender) {
+            if (!isset($genderCounts[$gender])) {
+                $genderCounts[$gender] = 0;
             }
         }
-        return view('admin.index', ['patientCounts' => $patientCounts],compact('patientC',
+        return view('admin.index', ['genderCounts' => $genderCounts],compact('patientC',
         'centers',
         'ristCount'
     ));

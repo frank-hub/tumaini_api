@@ -2,10 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RiskAssessmentController;
+use App\Http\Controllers\API\RiskFactorController;
 use App\Http\Controllers\Dashboard;
-use App\Http\Controllers\AppoitmentController;
+use App\Http\Controllers\API\AppoitmentController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\CentersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,22 +20,23 @@ use App\Http\Controllers\PatientController;
 |
 */
 
+
+
 Route::middleware(['json.request.type'])->group(function () {
-    Route::post('riskscore',[RiskAssessmentController::class,'calculateRisk']);
-
-});
-
-Route::middleware(['auth'])->group(function () {
+    Route::post('riskFactor/store',[RiskFactorController::class,'calculateRisk']);
 
     Route::prefix('appointment')->group(function () {
-        Route::get('index',[AppoitmentController::class,'index'])->name('app_index');
-        Route::get('create',[AppoitmentController::class,'create'])->name('app_create');
-        Route::post('store',[AppoitmentController::class,'store'])->name('app_store');
+        Route::get('index',[AppoitmentController::class,'index']);
+        Route::post('store',[AppoitmentController::class,'store']);
     });
 
-    Route::get('dashboard',[Dashboard::class,'index'])->name('dashboard');
+    Route::prefix('center')->group(function () {
+        Route::get('index',[CentersController::class,'index']);
 
+    });
 });
+
+Route::post('/login',[AuthAPIController::class,'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

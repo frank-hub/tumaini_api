@@ -18,7 +18,6 @@ class RiskAssessment extends Model
         'complications',
         'medication_use',
         'riskscore',
-        'county',
         'town',
     ];
 }

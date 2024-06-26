@@ -207,7 +207,7 @@
 										<th class="bb-2">Gender</th>
 										<th class="bb-2">Riskscore</th>
 										<th class="bb-2">Hemoglobin</th>
-										<th class="bb-2">County</th>
+										<th class="bb-2">Town</th>
 										<th class="bb-2">Pain Episodes</th>
 										<th class="bb-2">Medication Use</th>
 										<th class="bb-2">Complications</th>
@@ -234,7 +234,7 @@
                                                 @endif
                                             </td>
                                             <td>{{$riskScore->hemoglobin}}</td>
-                                            <td>{{$riskScore->county}}-{{$riskScore->town}}</td>
+                                            <td>{{$riskScore->town}}</td>
                                             <td>{{$riskScore->pain_episodes}}</td>
                                             <td>
                                                 {{$riskScore->medication_use}}

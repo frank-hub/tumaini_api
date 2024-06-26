@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RiskAssessment;
 use Illuminate\Http\Request;
+use AfricasTalking\SDK\AfricasTalking;
 
 class RiskAssessmentController extends Controller
 {
@@ -37,7 +38,6 @@ class RiskAssessmentController extends Controller
         $validatedData = $request->validate([
             'riskscore' => 'nullable',
             'full_name' => 'required',
-            'county' => 'required',
             'town' => 'required',
             'age' => 'required|min:0',
             'gender' => 'required|in:Male,Female',
@@ -55,13 +55,27 @@ class RiskAssessmentController extends Controller
         $validatedData['riskscore'] = $riskScore;
         RiskAssessment::create($validatedData);
 
+        $username = 'fracturedwifi'; // use 'sandbox' for development in the test environment
+        $apiKey   = 'atsk_5ebcf111accec36cab45a6855ff345335f9046f0aeb3596f93aeec3767cd507f0f14e209'; // use your sandbox app API key for development in the test environment
+        $AT       = new AfricasTalking($username, $apiKey);
+
+        // Get one of the services
+        $sms      = $AT->sms();
+        $fetch = $sms->fetchMessages();
+        // Use the service
+        $result   = $sms->send([
+            'to'      => '+254753651280',
+            'message' => 'Your Score is '.$riskScore
+        ]);
+
+        dd($fetch);
         // Return the risk score as a JSON response
         if ($request->wantsJson()) {
             // Handle API request
             return response()->json(['risk_score' => $riskScore]);
         }
 
-        return view('dash');
+        return redirect()->back();
     }
 
 

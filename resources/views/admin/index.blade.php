@@ -24,14 +24,14 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['County', 'Patients'],
-                @foreach ($patientCounts as $county => $count)
+                ['Gender', 'Patients'],
+                @foreach ($genderCounts as $county => $count)
                     ['{{ $county }}', {{ $count }}],
                 @endforeach
             ]);
 
             var options = {
-                title: 'Patient Counts by County',
+                title: 'Patient Counts by Gender',
                 chartArea: {width: '50%'},
                 hAxis: {
                     title: 'County',
@@ -60,12 +60,12 @@
 		<a href="{{url('/')}}" class="logo">
 		  <!-- logo-->
 		  <div class="logo-mini w-50">
-			  <span class="light-logo"><img src="images/logo-letter.png" alt="logo"></span>
-			  <span class="dark-logo"><img src="images/logo-letter.png" alt="logo"></span>
+			  {{-- <span class="light-logo"><img src="images/logo-letter.png" alt="logo"></span>
+			  <span class="dark-logo"><img src="images/logo-letter.png" alt="logo"></span> --}}
 		  </div>
 		  <div class="logo-lg">
-			  <span class="light-logo"><img src="images/logo-dark-text.png" alt="logo"></span>
-			  <span class="dark-logo"><img src="images/logo-light-text.png" alt="logo"></span>
+			  <span class="light-logo"><img src="images/logo-dark-text.png" class="img-fluid" alt="logo"></span>
+			  <span class="dark-logo"><img src="images/logo-dark-text.png" alt="logo"></span>
 		  </div>
 		</a>
 	</div>

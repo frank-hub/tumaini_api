@@ -16,12 +16,12 @@ return new class extends Migration
             $table->integer('patient_id');
             $table->string('symptoms');
             $table->string('severity_desease');
-            $table->string('allergies');
+            $table->string('allergies')->nullable();
             $table->string('date_time');
-            $table->string('appointment_reason');
-            $table->string('appointment_type');
-            $table->string('center');
-            $table->string('notes');
+            $table->string('appointment_reason')->nullable();
+            $table->string('appointment_type')->nullable();
+            $table->string('center')->nullable();
+            $table->string('notes')->nullable();
 
             $table->timestamps();
         });

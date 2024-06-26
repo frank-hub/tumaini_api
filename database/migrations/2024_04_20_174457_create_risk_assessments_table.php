@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('risk_assessments', function (Blueprint $table) {
             $table->id();
             $table->string('full_name');
-            $table->string('county');
             $table->string('town');
             $table->string('riskscore');
             $table->string('age');
