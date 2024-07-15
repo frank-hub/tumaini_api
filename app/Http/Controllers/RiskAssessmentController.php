@@ -61,14 +61,12 @@ class RiskAssessmentController extends Controller
 
         // Get one of the services
         $sms      = $AT->sms();
-        $fetch = $sms->fetchMessages();
         // Use the service
         $result   = $sms->send([
             'to'      => '+254753651280',
             'message' => 'Your Score is '.$riskScore
         ]);
 
-        dd($fetch);
         // Return the risk score as a JSON response
         if ($request->wantsJson()) {
             // Handle API request

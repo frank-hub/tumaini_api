@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use AfricasTalking\SDK\AfricasTalking;
 use App\Models\RiskAssessment;
+use Illuminate\Support\Facades\Log;
 
 class RiskFactorController extends Controller
 {
@@ -48,6 +49,11 @@ class RiskFactorController extends Controller
              'message' => 'Your Score is '.$riskScore
          ]);
 
+
+
+        //  Advanta SMS
+
+
          // Return the risk score as a JSON response
          return response()->json([
             'status' => true,
@@ -84,5 +90,35 @@ class RiskFactorController extends Controller
         );
 
         return $riskScore;
+    }
+
+
+    public function sendSms()
+    {
+        $data = [
+            "count" => 1,
+            "smslist" => [
+                [
+                    "partnerID" => "10840",
+                    "apikey" => "68b4e362a0ebff0ea0a54f87f4383dd6",
+                    "pass_type" => "plain",
+                    "clientsmsid" => 1234,
+                    "mobile" => "+254715873713",
+                    "message" => "This is a test message 0",
+                    "shortcode" => "TumainiSC",
+                ]
+            ]
+        ];
+
+        Log::info('Sending SMS payload:', $data);
+
+
+        $response = Http::post('https://quicksms.advantasms.com/api/services/sendbulk/', $data);
+
+        if ($response->successful()) {
+            return response()->json(['status' => 'SMS sent successfully']);
+        } else {
+            return response()->json(['status' => 'Failed to send SMS', 'error' => $response->body()]);
+        }
     }
 }

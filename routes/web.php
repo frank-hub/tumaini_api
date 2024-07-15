@@ -7,6 +7,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\RiskAssessmentController;
 use App\Http\Controllers\DiagnosticCentersController;
 use App\Http\Controllers\Front\AuthController;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,9 @@ Route::get('reports',[RiskAssessmentController::class,'index']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard',[Dashboard::class,'index'])->name('dashboard');
+
+    Route::get('news/index',[NewsController::class,'index'])->name('news_index');
+    Route::post('news/store',[NewsController::class,'store'])->name('news_store');
 
     Route::prefix('appointment')->group(function () {
         Route::get('index',[AppoitmentController::class,'index'])->name('app_index');

@@ -11,7 +11,7 @@
 					<span>Dashboard</span>
 				  </a>
 				</li>
-				
+
 				<li class="treeview">
 				  <a href="#">
 					<i class="icon-Barcode-read"><span class="path1"></span><span class="path2"></span></i>
@@ -57,7 +57,19 @@
 					<span>Reports</span>
 				  </a>
 				</li>
-
+                <li class="treeview">
+                    <a href="#">
+                      <i class="icon-Lock-overturning"><span class="path1"></span><span class="path2"></span></i>
+                      <span>News & Updates</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li><a href="{{route('auth_login')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>View News</a></li>
+                      <li><a href="{{route('news_index')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add News</a></li>
+                    </ul>
+                  </li>
 
 				<li class="treeview">
 				  <a href="#">

@@ -8,6 +8,7 @@ use App\Http\Controllers\API\AppoitmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CentersController;
+use App\Http\Controllers\API\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ use App\Http\Controllers\API\CentersController;
 
 Route::middleware(['json.request.type'])->group(function () {
     Route::post('riskFactor/store',[RiskFactorController::class,'calculateRisk']);
+    Route::post('/send-sms', [RiskFactorController::class, 'sendSms']);
+
+    Route::get('news',[NewsController::class,'index']);
 
     Route::prefix('appointment')->group(function () {
         Route::get('index',[AppoitmentController::class,'index']);

@@ -201,25 +201,20 @@
                       <h4 class="box-title">Diagnostic Center Info</h4>
                     </div>
                     <!-- /.box-header -->
-                    <form method="POST" action="{{route('center_store')}}">
+                    <form method="POST" action="{{route('news_store')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">
-
                             <div class="form-group">
-                                <label class="form-label">Center Name:</label>
-                                <input type="text" class="form-control" placeholder="Center name" name="name">
+                                <label class="form-label">Title:</label>
+                                <input type="text" class="form-control" placeholder=" Title" name="title">
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Country:</label>
-                                <input type="text" class="form-control" placeholder=" Country" name="country">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">City:</label>
-                                <input type="text" class="form-control" placeholder="City" name="city">
+                                <label class="form-label">Image:</label>
+                                <input type="file" class="form-control" placeholder="image" name="image">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Description</label>
-                                <textarea rows="4" class="form-control" placeholder="Description" name="description"></textarea>
+                                <textarea rows="4" class="form-control" placeholder="Description" name="desc"></textarea>
                               </div>
 
 
